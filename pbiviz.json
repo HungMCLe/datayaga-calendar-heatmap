@@ -1,0 +1,26 @@
+{
+    "visual": {
+        "name": "calendarHeatmapVisual",
+        "displayName": "Calendar Heatmap",
+        "guid": "calendarHeatmapVisualA1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6",
+        "visualClassName": "Visual",
+        "version": "2.0.5.0",
+        "description": "GitHub-style calendar heatmap for Power BI. Visualize daily patterns with color-coded cells, anomaly detection, sparklines, multi-measure tooltips, year comparison, and more.",
+        "supportUrl": "https://github.com/HungMCLe/datayaga-calendar-heatmap",
+        "gitHubUrl": "https://github.com/HungMCLe/datayaga-calendar-heatmap"
+    },
+    "apiVersion": "5.10.0",
+    "author": {
+        "name": "Datayaga",
+        "email": "hungmcle@gmail.com"
+    },
+    "assets": {
+        "icon": "assets/icon.png"
+    },
+    "externalJS": null,
+    "style": "style/visual.less",
+    "capabilities": "capabilities.json",
+    "dependencies": null,
+    "stringResources": [],
+    "version": "2.0.5.0"
+}
