@@ -16,68 +16,288 @@ A GitHub-style calendar heatmap custom visual for Power BI. Visualize daily, wee
 4. Drag the Calendar Heatmap onto your report canvas
 5. Add your fields:
 
+```
+  +-------------------------+
+  | Field Wells              |
+  |                         |
+  | Date *        [Date]    |
+  | Value *       [Sales]   |
+  | Tooltip       [Orders]  |  (optional, up to 10)
+  | Annotation    [Notes]   |  (optional)
+  +-------------------------+
+
+  * = required
+```
+
 | Field Well | What to Add | Required? |
 |---|---|---|
-| **Date** | A date column (or Date Hierarchy) | Yes |
-| **Value** | A measure (e.g., Sales, Count) | Yes |
-| **Tooltip Fields** | Additional measures for tooltip detail | No |
-| **Annotation** | A text column to label specific dates | No |
+| **Date** | A date column (or Date Hierarchy: Year > Quarter > Month > Day) | Yes |
+| **Value** | A measure (e.g., Sales, Count, Revenue) | Yes |
+| **Tooltip Fields** | Additional measures shown in the hover tooltip | No |
+| **Annotation** | A text column to label specific dates (e.g., "Holiday", "Launch Day") | No |
 
 ---
 
-## Features
+## Visual Layout
 
-### Core Visualization
+### Horizontal Mode (wide containers)
 
-- **Daily Calendar Grid** — 53-week x 7-day grid showing every day of the year
-- **10 Color Palettes** — Green, Blue, Orange, Purple, Red, Viridis, Plasma, Warm, Cool, or Custom
-- **Missing Data Distinction** — Zero-with-data gets the lightest color; no-data gets the empty color
-- **Responsive Layout** — Cells dynamically resize to fill available space
-- **Auto Orientation** — Automatically switches between horizontal (wide) and vertical (tall) layout based on container shape
+The default layout when the visual is wider than it is tall. Weeks go left to right, days of the week go top to bottom.
 
-### Labels & Markers
+```
+  2024
+  Jan       Feb       Mar       Apr       ...
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  Sun
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |  |##|##|  |  |  |  |##|##|  |  |  |  |  |  |  |  Mon
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |  |##|##|  |  |  |  |##|##|##|  |  |  |  |  |  |  Tue
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |  |  |##|  |  |  |  |  |##|##|##|  |  |  |  |  |  Wed
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |  |  |  |  |  |  |  |  |##|##|  |  |  |  |  |  |  Thu
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |  |  |  |  |  |  |  |  |  |##|  |  |  |  |  |  |  Fri
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  Sat
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+                                       Less [=====] More
+```
 
-- **Month Labels** — Positioned along the week axis (top in horizontal, left in vertical)
-- **Day-of-Week Labels** — Mon/Tue/Wed or single letters in vertical mode
-- **Year Label** — Shown for single-year data; navigation arrows for multi-year
-- **Week Numbers** — ISO week numbers along the grid edge
-- **Data Labels** — Show values inside cells (auto-hides when cells are too small)
-- **Today Marker** — Colored border highlighting today's date
-- **Min/Max Markers** — Colored dots on the highest and lowest value cells
+### Vertical Mode (tall containers)
 
-### Tooltips
+Automatically activates when the visual is taller than it is wide. Days of the week go left to right, weeks go top to bottom.
 
-- **Rich Tooltips** — Dark-themed tooltip showing date, color swatch, and value
-- **Multi-Measure Tooltips** — Add up to 10 extra measures to the Tooltip Fields well
-- **Annotations** — Text annotations shown in the tooltip for annotated dates
-- **Anomaly Indicator** — Tooltip flags anomalous values
+```
+       S  M  T  W  T  F  S
+       +--+--+--+--+--+--+
+  Jan  |  |  |##|##|  |  |
+       +--+--+--+--+--+--+
+       |  |  |##|##|  |  |
+       +--+--+--+--+--+--+
+       |  |  |  |##|  |  |
+       +--+--+--+--+--+--+
+       |  |  |  |  |  |  |
+       +--+--+--+--+--+--+
+  Feb  |  |##|##|##|##|  |
+       +--+--+--+--+--+--+
+       |  |##|##|##|##|  |
+       +--+--+--+--+--+--+
+       ...
+```
 
-### Analytics
+The visual picks whichever orientation gives the largest cells for the given container size.
 
-- **Summary Stats** — Total, Average, Min, Max, and day count displayed below the grid
-- **Trend Sparkline** — A line chart showing value distribution across the year
-- **Streak Tracking** — Longest consecutive streaks above and below the yearly average
-- **Anomaly Detection** — Statistical outlier detection using rolling 30-day mean and standard deviation; anomalous cells pulse with a colored border
+---
 
-### Aggregation & Comparison
+## Feature Guide
 
-- **Daily / Weekly / Monthly Views** — Switch between aggregation levels in the format pane
-- **Auto Granularity Detection** — If your data has only 12 points per year, it auto-switches to Monthly view
-- **Year-over-Year Comparison** — Side-by-side view of two years for trend comparison
-- **Year Navigation** — Arrow buttons to cycle through years when data spans multiple years
+### 1. Color Palettes
 
-### Conditional Formatting
+Ten built-in palettes, plus a fully custom start/end color gradient.
 
-- **Threshold Overrides** — Define up to 3 value thresholds with custom colors (e.g., Red < 100, Yellow < 500, Green above)
-- Works in both daily and aggregated views
+```
+  Greens:   [ ]  [..]  [##]  [##]  [##]     light to dark green
+  Blues:    [ ]  [..]  [##]  [##]  [##]     light to dark blue
+  Viridis:  [ ]  [..]  [##]  [##]  [##]     purple to yellow
+  Custom:   [start color] -----> [end color]
+```
 
-### Interactions
+Choose the palette and number of color steps (3 to 9) in **Format > Color Settings**.
 
-- **Click to Cross-Filter** — Click a cell to filter other visuals on the page
-- **Ctrl+Click** — Add to selection without clearing previous
-- **Drag to Select** — Click and drag across cells to select a date range (5px dead-zone prevents accidental drags)
-- **Right-Click Context Menu** — Drill-through and other Power BI context actions
-- **Inbound Cross-Filtering** — When other visuals filter the data, non-matching cells dim automatically
+### 2. Today Marker
+
+A colored border around today's cell so you can quickly find the current date.
+
+```
+  +--+--+=========+--+--+
+  |  |  || today ||  |  |
+  +--+--+=========+--+--+
+```
+
+Toggle in **Format > Today Marker**. Works in daily, weekly, and monthly views.
+
+### 3. Data Labels
+
+Show the numeric value inside each cell. Only appears when cells are large enough (16px+).
+
+```
+  +------+------+------+
+  | 142  | 89   | 205  |
+  +------+------+------+
+  | 67   |  0   | 178  |
+  +------+------+------+
+```
+
+Toggle in **Format > Cell Settings > Show Data Labels**.
+
+### 4. Min/Max Markers
+
+Small colored dots on the cells with the highest and lowest values for the year.
+
+```
+  +--+--+--+--+--+
+  |  |  | *|  |  |    * = gold dot (max)
+  +--+--+--+--+--+
+  |  | o|  |  |  |    o = red dot (min)
+  +--+--+--+--+--+
+```
+
+Toggle in **Format > Markers**.
+
+### 5. Week Numbers
+
+ISO week numbers displayed along the grid edge.
+
+```
+  W1  W2  W3  W4  W5 ...
+  +--+--+--+--+--+
+  |  |  |  |  |  |
+```
+
+Toggle in **Format > Label Settings > Show Week Numbers**.
+
+### 6. Summary Stats and Sparkline
+
+Summary statistics and a trend sparkline appear below the grid.
+
+```
+  +--+--+--+--+--+--+--+--+--+--+--+--+  (grid)
+  ...
+  Total: 1.6M | Avg: 4.5K | Min: 0 | Max: 12.3K | 366 days
+
+          /\      /\
+    _   /    \  /    \       /\
+     \_/      \/      \_   /  \__    (sparkline)
+                        \_/
+
+  Longest streak above avg: 14 days | Below avg: 8 days
+```
+
+Toggle each in **Format > Summary and Analytics**.
+
+### 7. Anomaly Detection
+
+Cells with values more than N standard deviations from the 30-day rolling mean get a pulsing colored border.
+
+```
+  +--+--+--+--+--+--+
+  |  |  |!!!!|  |  |  |    !!!! = pulsing red border
+  +--+--+--+--+--+--+
+```
+
+Configure the threshold (1 to 4 std deviations) in **Format > Anomaly Detection**.
+
+### 8. Multi-Measure Tooltips
+
+Hover over any cell to see a rich tooltip. Add extra measures to the Tooltip Fields well for more detail.
+
+```
+  +---------------------------+
+  | [*] March 15, 2024        |
+  |---------------------------|
+  | SALES          4,521      |
+  | ORDERS           302      |
+  | AVG ORDER       14.97     |
+  |                           |
+  | Product launch day        |  (annotation)
+  +---------------------------+
+```
+
+### 9. Annotations
+
+Add a text column to the Annotation field well. Annotated dates show a small blue dot in the cell corner and the text appears in the tooltip.
+
+```
+  +--+--+--+--+--+
+  |  |  |o |  |  |    o = blue annotation dot
+  +--+--+--+--+--+
+```
+
+### 10. Conditional Formatting (Thresholds)
+
+Override the color palette with value-based threshold zones.
+
+```
+  Threshold setup:
+    Low   <= 100   [red]
+    Mid   <= 500   [yellow]
+    High  >  500   [green]
+
+  Result:
+  +------+------+------+------+
+  | red  | yel  | grn  | grn  |
+  |  42  | 310  | 820  | 1.2K |
+  +------+------+------+------+
+```
+
+Configure in **Format > Conditional Formatting**.
+
+### 11. Aggregation Views
+
+Switch from daily to weekly or monthly aggregation.
+
+**Weekly view** - 53 bars, one per week:
+
+```
+  2024 - Weekly View
+  +--+--+--+--+--+--+--+--+--+ ... +--+
+  |  |  |##|##|##|  |  |##|##|     |  |
+  +--+--+--+--+--+--+--+--+--+ ... +--+
+  W1 W2 W3 W4 W5 W6 W7 W8 W9     W53
+```
+
+**Monthly view** - 4x3 grid:
+
+```
+  2024 - Monthly View
+  +---------+---------+---------+---------+
+  |   Jan   |   Feb   |   Mar   |   Apr   |
+  |  4,521  |  3,890  |  5,102  |  4,876  |
+  +---------+---------+---------+---------+
+  |   May   |   Jun   |   Jul   |   Aug   |
+  |  5,443  |  5,210  |  4,998  |  5,321  |
+  +---------+---------+---------+---------+
+  |   Sep   |   Oct   |   Nov   |   Dec   |
+  |  5,102  |  5,678  |  6,234  |  7,891  |
+  +---------+---------+---------+---------+
+```
+
+If your data only has 12 rows per year, the visual auto-switches to monthly view.
+
+Configure in **Format > Aggregation and Comparison**.
+
+### 12. Year-over-Year Comparison
+
+Side-by-side view of the last two years in your data.
+
+```
+         2023                              2024
+  Jan  Feb  Mar  ...              Jan  Feb  Mar  ...
+  +--+--+--+--+--+              +--+--+--+--+--+
+  |  |  |##|  |  |              |  |##|##|  |  |
+  |  |##|##|  |  |              |  |##|##|##|  |
+  ...                           ...
+  Total: 1.2M  Avg: 3.3K       Total: 1.6M  Avg: 4.5K
+```
+
+Toggle in **Format > Aggregation and Comparison > Year-over-Year**.
+
+### 13. Cross-Filtering
+
+Click any cell (or drag to select a range) to cross-filter other visuals on the page. When other visuals filter the data, non-matching cells automatically dim.
+
+```
+  Before filter:                After clicking March:
+  +--+--+--+--+--+            +--+--+--+--+--+
+  |##|##|##|##|##|            |..|..|##|..|..|
+  |##|##|##|##|##|            |..|..|##|..|..|
+  +--+--+--+--+--+            +--+--+--+--+--+
+
+  .. = dimmed (0.15 opacity)
+  ## = highlighted (full opacity)
+```
 
 ---
 
@@ -139,7 +359,7 @@ A GitHub-style calendar heatmap custom visual for Power BI. Visualize daily, wee
 | Min Marker Color | `#f85149` | Color for minimum value |
 | Max Marker Color | `#ffd700` | Color for maximum value |
 
-### Summary & Analytics
+### Summary and Analytics
 | Setting | Default | Description |
 |---|---|---|
 | Show Summary | Off | Display total/avg/min/max stats |
@@ -157,7 +377,7 @@ A GitHub-style calendar heatmap custom visual for Power BI. Visualize daily, wee
 | Threshold (Std Dev) | 2 | Standard deviations for outlier detection (1-4) |
 | Anomaly Color | `#f85149` | Border color for anomalous cells |
 
-### Aggregation & Comparison
+### Aggregation and Comparison
 | Setting | Default | Description |
 |---|---|---|
 | Aggregation Mode | Daily | Daily / Weekly / Monthly |
@@ -178,9 +398,9 @@ A GitHub-style calendar heatmap custom visual for Power BI. Visualize daily, wee
 ## Data Requirements
 
 - **Date column**: Any date/datetime column, or a Power BI Date Hierarchy (Year > Quarter > Month > Day)
-- **Value measure**: Any numeric measure — the visual colors cells by this value
-- **Row limit**: Up to 30,000 rows (covers ~82 years of daily data)
-- **Supported granularities**: Daily (365 rows/year), Weekly (52), Monthly (12) — auto-detected
+- **Value measure**: Any numeric measure. The visual colors cells by this value.
+- **Row limit**: Up to 30,000 rows (covers about 82 years of daily data)
+- **Supported granularities**: Daily (365 rows/year), Weekly (52), Monthly (12). Auto-detected based on data density.
 
 ---
 
