@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <defs>
+    <clipPath id="roundedBg">
+      <rect width="300" height="300" rx="40" ry="40"/>
+    </clipPath>
+  </defs>
+
+  <!-- Dark background -->
+  <rect width="300" height="300" rx="40" ry="40" fill="#0d1117"/>
+
+  <!-- Grid of heatmap cells - 7 columns x 7 rows -->
+  <!-- Row 0 (top) -->
+  <rect x="52" y="52" width="24" height="24" rx="4" fill="#161b22"/>
+  <rect x="82" y="52" width="24" height="24" rx="4" fill="#0e4429"/>
+  <rect x="112" y="52" width="24" height="24" rx="4" fill="#161b22"/>
+  <rect x="142" y="52" width="24" height="24" rx="4" fill="#006d32"/>
+  <rect x="172" y="52" width="24" height="24" rx="4" fill="#0e4429"/>
+  <rect x="202" y="52" width="24" height="24" rx="4" fill="#161b22"/>
+  <rect x="232" y="52" width="24" height="24" rx="4" fill="#161b22"/>
+
+  <!-- Row 1 -->
+  <rect x="52" y="82" width="24" height="24" rx="4" fill="#0e4429"/>
+  <rect x="82" y="82" width="24" height="24" rx="4" fill="#26a641"/>
+  <rect x="112" y="82" width="24" height="24" rx="4" fill="#39d353"/>
+  <rect x="142" y="82" width="24" height="24" rx="4" fill="#006d32"/>
+  <rect x="172" y="82" width="24" height="24" rx="4" fill="#39d353"/>
+  <rect x="202" y="82" width="24" height="24" rx="4" fill="#26a641"/>
+  <rect x="232" y="82" width="24" height="24" rx="4" fill="#0e4429"/>
+
+  <!-- Row 2 -->
+  <rect x="52" y="112" width="24" height="24" rx="4" fill="#161b22"/>
+  <rect x="82" y="112" width="24" height="24" rx="4" fill="#39d353"/>
+  <rect x="112" y="112" width="24" height="24" rx="4" fill="#39d353"/>
+  <rect x="142" y="112" width="24" height="24" rx="4" fill="#26a641"/>
+  <rect x="172" y="112" width="24" height="24" rx="4" fill="#39d353"/>
+  <rect x="202" y="112" width="24" height="24" rx="4" fill="#39d353"/>
+  <rect x="232" y="112" width="24" height="24" rx="4" fill="#006d32"/>
+
+  <!-- Row 3 (center) -->
+  <rect x="52" y="142" width="24" height="24" rx="4" fill="#006d32"/>
+  <rect x="82" y="142" width="24" height="24" rx="4" fill="#006d32"/>
+  <rect x="112" y="142" width="24" height="24" rx="4" fill="#26a641"/>
+  <rect x="142" y="142" width="24" height="24" rx="4" fill="#39d353"/>
+  <rect x="172" y="142" width="24" height="24" rx="4" fill="#26a641"/>
+  <rect x="202" y="142" width="24" height="24" rx="4" fill="#006d32"/>
+  <rect x="232" y="142" width="24" height="24" rx="4" fill="#26a641"/>
+
+  <!-- Row 4 -->
+  <rect x="52" y="172" width="24" height="24" rx="4" fill="#161b22"/>
+  <rect x="82" y="172" width="24" height="24" rx="4" fill="#0e4429"/>
+  <rect x="112" y="172" width="24" height="24" rx="4" fill="#39d353"/>
+  <rect x="142" y="172" width="24" height="24" rx="4" fill="#26a641"/>
+  <rect x="172" y="172" width="24" height="24" rx="4" fill="#006d32"/>
+  <rect x="202" y="172" width="24" height="24" rx="4" fill="#39d353"/>
+  <rect x="232" y="172" width="24" height="24" rx="4" fill="#161b22"/>
+
+  <!-- Row 5 -->
+  <rect x="52" y="202" width="24" height="24" rx="4" fill="#0e4429"/>
+  <rect x="82" y="202" width="24" height="24" rx="4" fill="#26a641"/>
+  <rect x="112" y="202" width="24" height="24" rx="4" fill="#006d32"/>
+  <rect x="142" y="202" width="24" height="24" rx="4" fill="#161b22"/>
+  <rect x="172" y="202" width="24" height="24" rx="4" fill="#26a641"/>
+  <rect x="202" y="202" width="24" height="24" rx="4" fill="#0e4429"/>
+  <rect x="232" y="202" width="24" height="24" rx="4" fill="#006d32"/>
+
+  <!-- Row 6 (bottom) -->
+  <rect x="52" y="232" width="24" height="24" rx="4" fill="#161b22"/>
+  <rect x="82" y="232" width="24" height="24" rx="4" fill="#161b22"/>
+  <rect x="112" y="232" width="24" height="24" rx="4" fill="#0e4429"/>
+  <rect x="142" y="232" width="24" height="24" rx="4" fill="#006d32"/>
+  <rect x="172" y="232" width="24" height="24" rx="4" fill="#161b22"/>
+  <rect x="202" y="232" width="24" height="24" rx="4" fill="#0e4429"/>
+  <rect x="232" y="232" width="24" height="24" rx="4" fill="#161b22"/>
+</svg>
